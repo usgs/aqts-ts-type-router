@@ -1,0 +1,45 @@
+service: aqts-ts-type-router
+
+provider:
+  name: aws
+  region: ${opt:region, 'us-west-2'}
+  stage: ${opt:stage, 'TEST'}
+  runtime: java8
+  memorySize: 256
+  timeout: 60
+  logRetentionInDays: 30
+  deploymentBucket:
+    name: iow-cloud-applications
+  stackTags:
+    "wma:applicationId": "AQTS Time Series Description"
+    "wma:contact": "Jim Kreft jkreft@usgs.gov"
+    "wma:environment": ${self:provider.stage}
+    "wma:taggingVersion": 0.0.1
+    "wma:costCenter": TBD
+
+custom:
+  accountNumber : ${ssm:/iow/aws/accountNumber}
+  vpc:
+    securityGroupIds: ${ssm:/iow/retriever-capture/${self:provider.stage}/securityGroupIds~split}
+    subnetIds: ${ssm:/iow/aws/vpc/${self:provider.stage}/subnetIds~split}
+  db:
+    connectInfo: ${ssm:/aws/reference/secretsmanager/NWCAPTURE-DB-${self:provider.stage}~true}
+
+functions:
+  echoObject:
+    handler: gov.usgs.wma.waterdata.EchoObjectHandler
+    role: arn:aws:iam::${self:custom.accountNumber}:role/csr-Lambda-Role
+    environment:
+      FUNCTION_NAME: echoObject
+      AQTS_DATABASE_ADDRESS: ${self:custom.db.connectInfo.DATABASE_ADDRESS}
+      AQTS_DATABASE_PORT: ${self:custom.db.connectInfo.DATABASE_PORT}
+      AQTS_SCHEMA_NAME: ${self:custom.db.connectInfo.SCHEMA_NAME}
+      AQTS_SCHEMA_OWNER_USERNAME: ${self:custom.db.connectInfo.SCHEMA_OWNER_USERNAME}
+      AQTS_DATABASE_NAME: ${self:custom.db.connectInfo.DATABASE_NAME}
+      AQTS_SCHEMA_OWNER_PASSWORD: ${self:custom.db.connectInfo.SCHEMA_OWNER_PASSWORD}
+      AWS_DEPLOYMENT_REGION: ${self:provider.region}
+    vpc: ${self:custom.vpc}
+
+package:
+  artifact: /build/target/aqts-ts-type-router-aws.jar
+
