@@ -26,7 +26,7 @@ custom:
     connectInfo: ${ssm:/aws/reference/secretsmanager/NWCAPTURE-DB-${self:provider.stage}~true}
 
 functions:
-  echoObject:
+  determineRoute:
     handler: gov.usgs.wma.waterdata.DetermineRouteHandler
     role: arn:aws:iam::${self:custom.accountNumber}:role/csr-Lambda-Role
     environment:
