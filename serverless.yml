@@ -11,7 +11,7 @@ provider:
   deploymentBucket:
     name: iow-cloud-applications
   stackTags:
-    "wma:applicationId": "AQTS Time Series Description"
+    "wma:applicationId": "AQTS Time Series Type Router"
     "wma:contact": "Jim Kreft jkreft@usgs.gov"
     "wma:environment": ${self:provider.stage}
     "wma:taggingVersion": 0.0.1
@@ -27,10 +27,10 @@ custom:
 
 functions:
   echoObject:
-    handler: gov.usgs.wma.waterdata.EchoObjectHandler
+    handler: gov.usgs.wma.waterdata.DetermineRouteHandler
     role: arn:aws:iam::${self:custom.accountNumber}:role/csr-Lambda-Role
     environment:
-      FUNCTION_NAME: echoObject
+      FUNCTION_NAME: DetermineRoute
       AQTS_DATABASE_ADDRESS: ${self:custom.db.connectInfo.DATABASE_ADDRESS}
       AQTS_DATABASE_PORT: ${self:custom.db.connectInfo.DATABASE_PORT}
       AQTS_SCHEMA_NAME: ${self:custom.db.connectInfo.SCHEMA_NAME}
@@ -42,4 +42,3 @@ functions:
 
 package:
   artifact: /build/target/aqts-ts-type-router-aws.jar
-
