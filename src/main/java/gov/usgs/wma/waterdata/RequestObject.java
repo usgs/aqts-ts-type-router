@@ -2,12 +2,12 @@ package gov.usgs.wma.waterdata;
 
 public class RequestObject {
 
-	private Long[] ids;
+	private Long id;
 
-	public Long[] getIds() {
-		return ids;
+	public Long getId() {
+		return id;
 	}
-	public void setIds(Long[] ids) {
-		this.ids = ids;
+	public void setId(Long id) {
+		this.id = id;
 	}
 }

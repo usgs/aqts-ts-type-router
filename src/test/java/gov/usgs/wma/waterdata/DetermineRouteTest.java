@@ -18,11 +18,11 @@ public class DetermineRouteTest {
 	@Test
 	public void foundTest() {
 		RequestObject request = new RequestObject();
-		Long[] ids = new Long[] {Long.valueOf(1),Long.valueOf(2),Long.valueOf(3),Long.valueOf(4),Long.valueOf(5)};
-		request.setIds(ids);
+		request.setId(Long.valueOf(1));
 		ResultObject result = determineRoute.apply(request);
 		assertNotNull(result);
-		assertEquals(ids, result.getOtherIds());
+		assertEquals(Long.valueOf(1), result.getId());
+		assertEquals("other", result.getType());
 	}
 
 }

@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
-public class DetermineRoute implements Function<RequestObject, Object> {
+public class DetermineRoute implements Function<RequestObject, ResultObject> {
 
 	@Autowired
 	JsonDataDao jsonDataDao;
@@ -21,7 +21,8 @@ public class DetermineRoute implements Function<RequestObject, Object> {
 //		for (Long id : request.getIds()) {
 //			
 //		}
-		result.setOtherIds(request.getIds());
+		result.setId(request.getId());
+		result.setType("other");
 		return result;
 	}
 }
