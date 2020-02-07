@@ -4,7 +4,7 @@ spring:
     username: ${AQTS_SCHEMA_OWNER_USERNAME}
     password: ${AQTS_SCHEMA_OWNER_PASSWORD}
     hikari:
-      maximumPoolSize: 1
+      maximumPoolSize: 2
 
 logging:
   level:
