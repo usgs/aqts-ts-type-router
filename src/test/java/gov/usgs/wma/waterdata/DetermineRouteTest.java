@@ -5,6 +5,8 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
+import java.io.IOException;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
@@ -20,7 +22,7 @@ public class DetermineRouteTest {
 	DetermineRoute determineRoute;
 
 	@Test
-	public void foundTest() {
+	public void foundTest() throws IOException {
 		when(jsonDataDao.getJsonData(anyLong())).thenReturn(new JsonData());
 		determineRoute = new DetermineRoute(jsonDataDao);
 		RequestObject request = new RequestObject();

@@ -15,7 +15,7 @@ public class JsonDataDao {
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
 
-	@Value("classpath:sql/activity/readArsActivity.sql")
+	@Value("classpath:sql/jsonData.sql")
 	private Resource sqlFile;
 
 	public JsonData getJsonData(Long jsonDataId) throws IOException {

@@ -1,6 +1,9 @@
 package gov.usgs.wma.waterdata;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+
+import java.io.IOException;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import org.junit.jupiter.api.Test;
@@ -44,7 +47,7 @@ public class JsonDataDaoIT {
 	private JsonDataDao jsonDataDao;
 
 	@Test
-	public void foundTest() {
+	public void foundTest() throws IOException {
 		JsonData jsonData = jsonDataDao.getJsonData(Long.valueOf(1));
 		assertNotNull(jsonData);
 		assertEquals(1, jsonData.getId());
