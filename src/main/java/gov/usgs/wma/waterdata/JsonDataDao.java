@@ -1,18 +1,25 @@
 package gov.usgs.wma.waterdata;
 
+import java.io.IOException;
+
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.core.io.Resource;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
+import org.springframework.util.FileCopyUtils;
 
 @Component
 public class JsonDataDao {
+
 	@Autowired
 	protected JdbcTemplate jdbcTemplate;
 
-	public JsonData getJsonData(Long jsonDataId) {
-		String sql = "select json_data_id, response_code, (regexp_match(url, 'V2/(.*)\\?'))[1] service_name, script_name"
-				+ "  from json_data"
-				+ " where json_data_id = ?";
+	@Value("classpath:sql/activity/readArsActivity.sql")
+	private Resource sqlFile;
+
+	public JsonData getJsonData(Long jsonDataId) throws IOException {
+		String sql = new String(FileCopyUtils.copyToByteArray(sqlFile.getInputStream()));
 		return jdbcTemplate.queryForObject(sql,
 				new Object[] {jsonDataId},
 				new JsonDataRowMapper()

@@ -1,5 +1,6 @@
 package gov.usgs.wma.waterdata;
 
+import java.io.IOException;
 import java.util.function.Function;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -38,8 +39,16 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 
 	protected String determineType(Long id) {
 		String type = OTHER;
-		JsonData jsonData = jsonDataDao.getJsonData(id);
-		if (200 == jsonData.getResponseCode() && GET_TS_DATA.equalsIgnoreCase(jsonData.getScriptName())) {
+		JsonData jsonData = null;
+		try {
+			jsonData = jsonDataDao.getJsonData(id);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		if (null != jsonData
+				&& 200 == jsonData.getResponseCode()
+				&& GET_TS_DATA.equalsIgnoreCase(jsonData.getScriptName())) {
 			switch (jsonData.getServiceName()) {
 			case GET_TS_DESCRIPTION_LIST:
 				type = TS_DESCRIPTION_LIST;

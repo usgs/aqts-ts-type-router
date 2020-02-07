@@ -31,3 +31,4 @@ mvn verify -DTESTING_DATABASE_PORT=5437 -DTESTING_DATABASE_ADDRESS=localhost -DT
 ```
 
 ### LocalStack
+TBD
