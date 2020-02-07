@@ -1,6 +1,6 @@
 # Aquarius Timeseries (AQTS) Timeseries Type Router
 
-BADGES, BAGDES, BADGES
+[![Build Status](https://travis-ci.com/usgs/aqts-ts-type-router.svg?branch=master)](https://travis-ci.com/usgs/aqts-ts-type-router)
 
 Read the AQTS Capture database to determine the appropriate next step in transforming data for the Observations service.
 

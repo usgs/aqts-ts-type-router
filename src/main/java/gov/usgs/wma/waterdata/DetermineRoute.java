@@ -8,8 +8,21 @@ import org.springframework.stereotype.Component;
 @Component
 public class DetermineRoute implements Function<RequestObject, ResultObject> {
 
+	private JsonDataDao jsonDataDao;
+	// Script Names
+	public static final String GET_TS_DATA = "getTSData";
+	// Web Service Endpoints
+	public static final String GET_TS_DESCRIPTION_LIST = "GetTimeSeriesDescriptionListByUniqueId";
+	public static final String GET_TS_CORRECTED_DATA = "GetTimeSeriesCorrectedData";
+	// Router Types
+	public static final String OTHER = "other";
+	public static final String TS_DESCRIPTION_LIST = "tsDescriptionList";
+	public static final String TS_CORRECTED_DATA = "tsCorrectedData";
+
 	@Autowired
-	JsonDataDao jsonDataDao;
+	public DetermineRoute(JsonDataDao jsonDataDao) {
+		this.jsonDataDao = jsonDataDao;
+	}
 
 	@Override
 	public ResultObject apply(RequestObject request) {
@@ -18,11 +31,27 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 
 	protected ResultObject processRequest(RequestObject request) {
 		ResultObject result = new ResultObject();
-//		for (Long id : request.getIds()) {
-//			
-//		}
 		result.setId(request.getId());
-		result.setType("other");
+		result.setType(determineType(request.getId()));
 		return result;
+	}
+
+	protected String determineType(Long id) {
+		String type = OTHER;
+		JsonData jsonData = jsonDataDao.getJsonData(id);
+		if (200 == jsonData.getResponseCode() && GET_TS_DATA.equalsIgnoreCase(jsonData.getScriptName())) {
+			switch (jsonData.getServiceName()) {
+			case GET_TS_DESCRIPTION_LIST:
+				type = TS_DESCRIPTION_LIST;
+				break;
+			case GET_TS_CORRECTED_DATA:
+				type = TS_CORRECTED_DATA;
+				break;
+			default:
+				type = OTHER;
+				break;
+			}
+		}
+		return type;
 	}
 }

@@ -49,8 +49,8 @@ public class JsonDataDaoIT {
 		assertNotNull(jsonData);
 		assertEquals(1, jsonData.getId());
 		assertEquals(200, jsonData.getResponseCode());
-		assertEquals("GetTimeSeriesDescriptionListByUniqueId", jsonData.getServiceName());
-		assertEquals("script_name", jsonData.getScriptName());
+		assertEquals(DetermineRoute.GET_TS_DESCRIPTION_LIST, jsonData.getServiceName());
+		assertEquals(DetermineRoute.GET_TS_DATA, jsonData.getScriptName());
 	}
 
 }
