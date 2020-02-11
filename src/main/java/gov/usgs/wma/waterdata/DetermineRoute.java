@@ -19,6 +19,7 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 	public static final String GET_TS_DESCRIPTION_LIST = "GetTimeSeriesDescriptionListByUniqueId";
 	public static final String GET_TS_CORRECTED_DATA = "GetTimeSeriesCorrectedData";
 	// Router Types
+	public static final String ERROR = "error";
 	public static final String OTHER = "other";
 	public static final String TS_DESCRIPTION_LIST = "tsDescriptionList";
 	public static final String TS_CORRECTED_DATA = "tsCorrectedData";
@@ -41,10 +42,11 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 	}
 
 	protected String determineType(Long id) {
-		String type = null;
+		String type = ERROR;
 		JsonData jsonData = null;
 		try {
 			jsonData = jsonDataDao.getJsonData(id);
+			LOG.debug("jsonData: {}", jsonData);
 		} catch (IOException e) {
 			LOG.error("Issue getting json_data record.", e);
 		}
