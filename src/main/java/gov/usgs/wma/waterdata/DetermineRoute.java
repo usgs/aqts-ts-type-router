@@ -49,6 +49,7 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 		} catch (Exception e) {
 			LOG.error("Issue getting json_data record.", e);
 		}
+		LOG.debug("here");
 		if (null != jsonData
 				&& 200 == jsonData.getResponseCode()
 				&& GET_TS_DATA.equalsIgnoreCase(jsonData.getScriptName())) {
@@ -63,6 +64,8 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 				type = OTHER;
 				break;
 			}
+		} else {
+			type = OTHER;
 		}
 		return type;
 	}
