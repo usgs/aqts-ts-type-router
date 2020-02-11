@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <properties>
-        <java.version>11</java.version>
+<!--         <java.version>11</java.version> -->
         <revision>0-DEFAULT</revision>
         <wma.maven.url>https://cida.usgs.gov/artifactory</wma.maven.url>
         <aws-lambda-events.version>2.2.7</aws-lambda-events.version>

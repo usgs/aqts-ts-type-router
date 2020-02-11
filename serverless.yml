@@ -4,7 +4,7 @@ provider:
   name: aws
   region: ${opt:region, 'us-west-2'}
   stage: ${opt:stage, 'TEST'}
-  runtime: java11
+  runtime: java8
   memorySize: 256
   timeout: 60
   logRetentionInDays: 30
