@@ -4,7 +4,7 @@ provider:
   name: aws
   region: ${opt:region, 'us-west-2'}
   stage: ${opt:stage, 'TEST'}
-  runtime: java8
+  runtime: java11
   memorySize: 256
   timeout: 60
   logRetentionInDays: 30
@@ -38,6 +38,7 @@ functions:
       AQTS_DATABASE_NAME: ${self:custom.db.connectInfo.DATABASE_NAME}
       AQTS_SCHEMA_OWNER_PASSWORD: ${self:custom.db.connectInfo.SCHEMA_OWNER_PASSWORD}
       AWS_DEPLOYMENT_REGION: ${self:provider.region}
+      ROOT_LOG_LEVEL: INFO
     vpc: ${self:custom.vpc}
 
 package:

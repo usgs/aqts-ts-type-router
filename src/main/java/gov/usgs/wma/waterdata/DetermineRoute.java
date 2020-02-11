@@ -3,11 +3,14 @@ package gov.usgs.wma.waterdata;
 import java.io.IOException;
 import java.util.function.Function;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DetermineRoute implements Function<RequestObject, ResultObject> {
+	private static final Logger LOG = LoggerFactory.getLogger(DetermineRoute.class);
 
 	private JsonDataDao jsonDataDao;
 	// Script Names
@@ -38,13 +41,12 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 	}
 
 	protected String determineType(Long id) {
-		String type = OTHER;
+		String type = null;
 		JsonData jsonData = null;
 		try {
 			jsonData = jsonDataDao.getJsonData(id);
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+			LOG.error("Issue getting json_data record.", e);
 		}
 		if (null != jsonData
 				&& 200 == jsonData.getResponseCode()

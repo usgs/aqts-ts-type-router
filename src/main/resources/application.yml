@@ -8,5 +8,5 @@ spring:
 
 logging:
   level:
-    org.postgresql: DEBUG
+    root: ${ROOT_LOG_LEVEL}
     com.zaxxer: OFF

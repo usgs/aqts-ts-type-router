@@ -1,7 +1,6 @@
 package gov.usgs.wma.waterdata;
 
 public class ResultObject {
-
 	private Long id;
 	private String type;
 	public Long getId() {
