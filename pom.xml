@@ -8,7 +8,7 @@
     <packaging>jar</packaging>
 
     <properties>
-<!--         <java.version>11</java.version> -->
+        <java.version>11</java.version>
         <revision>0-DEFAULT</revision>
         <aws-lambda-events.version>2.2.7</aws-lambda-events.version>
         <aws-lambda-java-core.version>1.2.0</aws-lambda-java-core.version>
@@ -42,6 +42,32 @@
         <url>https://github.com/usgs/aqts-ts-type-router</url>
         <tag>HEAD</tag>
     </scm>
+
+    <repositories>
+        <repository>
+            <id>Central</id>
+            <name>Maven Central</name>
+            <url>https://repo.maven.apache.org/maven2/</url>
+        </repository>
+        <repository>
+            <id>WMA</id>
+            <name>WMA Artifactory</name>
+            <url>${wma.maven.url}/list/wma-maven-centralized/</url>
+        </repository>
+    </repositories>
+
+    <distributionManagement>
+        <repository>
+            <id>wma-maven-releases</id>
+            <name>wma-maven-releases</name>
+            <url>${wma.maven.url}/wma-maven-releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>wma-maven-snapshots</id>
+            <name>wma-maven-snapshots</name>
+            <url>${wma.maven.url}/wma-maven-snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
 
     <parent>
         <groupId>org.springframework.boot</groupId>
@@ -107,6 +133,23 @@
         </dependency>
     </dependencies>
 
+    <profiles>
+        <profile>
+            <id>release</id>
+            <build>
+                <plugins>
+                    <plugin>
+                        <artifactId>maven-scm-plugin</artifactId>
+                        <version>1.11.2</version>
+                        <configuration>
+                            <tag>${project.artifactId}-${project.version}</tag>
+                        </configuration>
+                    </plugin>
+                </plugins>
+            </build>
+        </profile>
+    </profiles>
+
     <build>
         <plugins>
             <plugin>
@@ -135,38 +178,31 @@
                     <createDependencyReducedPom>false</createDependencyReducedPom>
                 </configuration>
             </plugin>
-            <plugin>
-                <artifactId>maven-scm-plugin</artifactId>
-                <version>1.11.2</version>
-                <configuration>
-                    <tag>${project.artifactId}-${project.version}</tag>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.codehaus.mojo</groupId>
-                <artifactId>flatten-maven-plugin</artifactId>
-                <version>1.1.0</version>
-                <configuration>
-                    <updatePomFile>true</updatePomFile>
-                    <flattenMode>resolveCiFriendliesOnly</flattenMode>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>flatten</id>
-                        <phase>process-resources</phase>
-                        <goals>
-                            <goal>flatten</goal>
-                        </goals>
-                    </execution>
-                    <execution>
-                        <id>flatten.clean</id>
-                        <phase>clean</phase>
-                        <goals>
-                            <goal>clean</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
+<!--             <plugin> -->
+<!--                 <groupId>org.codehaus.mojo</groupId> -->
+<!--                 <artifactId>flatten-maven-plugin</artifactId> -->
+<!--                 <version>1.1.0</version> -->
+<!--                 <configuration> -->
+<!--                     <updatePomFile>true</updatePomFile> -->
+<!--                     <flattenMode>resolveCiFriendliesOnly</flattenMode> -->
+<!--                 </configuration> -->
+<!--                 <executions> -->
+<!--                     <execution> -->
+<!--                         <id>flatten</id> -->
+<!--                         <phase>process-resources</phase> -->
+<!--                         <goals> -->
+<!--                             <goal>flatten</goal> -->
+<!--                         </goals> -->
+<!--                     </execution> -->
+<!--                     <execution> -->
+<!--                         <id>flatten.clean</id> -->
+<!--                         <phase>clean</phase> -->
+<!--                         <goals> -->
+<!--                             <goal>clean</goal> -->
+<!--                         </goals> -->
+<!--                     </execution> -->
+<!--                 </executions> -->
+<!--             </plugin> -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-failsafe-plugin</artifactId>
