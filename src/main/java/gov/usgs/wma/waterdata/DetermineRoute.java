@@ -1,6 +1,5 @@
 package gov.usgs.wma.waterdata;
 
-import java.io.IOException;
 import java.util.function.Function;
 
 import org.slf4j.Logger;
@@ -47,7 +46,7 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 		try {
 			jsonData = jsonDataDao.getJsonData(id);
 			LOG.debug("jsonData: {}", jsonData);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			LOG.error("Issue getting json_data record.", e);
 		}
 		if (null != jsonData
