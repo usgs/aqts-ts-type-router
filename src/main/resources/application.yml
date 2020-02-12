@@ -6,6 +6,8 @@ spring:
     hikari:
       maximumPoolSize: 3
 
+maxTimeSeriesCorrectedData: ${MAX_TIME_SERIES_CORRECTED_DATA}
+
 logging:
   level:
     root: ${ROOT_LOG_LEVEL}

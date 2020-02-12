@@ -5,11 +5,15 @@ import java.util.function.Function;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 @Component
 public class DetermineRoute implements Function<RequestObject, ResultObject> {
 	private static final Logger LOG = LoggerFactory.getLogger(DetermineRoute.class);
+
+	@Value("${maxTimeSeriesCorrectedData}")
+	private Long maxTimeSeriesCorrectedData;
 
 	private JsonDataDao jsonDataDao;
 	// Script Names
@@ -58,7 +62,11 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 				type = TS_DESCRIPTION_LIST;
 				break;
 			case GET_TS_CORRECTED_DATA:
-				type = TS_CORRECTED_DATA;
+				if (maxTimeSeriesCorrectedData > jsonData.getContentLength()) {
+					type = TS_CORRECTED_DATA;
+				} else {
+					type = ERROR;
+				}
 				break;
 			default:
 				type = OTHER;

@@ -54,6 +54,7 @@ public class JsonDataDaoIT {
 		assertEquals(200, jsonData.getResponseCode());
 		assertEquals(DetermineRoute.GET_TS_DESCRIPTION_LIST, jsonData.getServiceName());
 		assertEquals(DetermineRoute.GET_TS_DATA, jsonData.getScriptName());
+		assertEquals(Long.valueOf(8), jsonData.getContentLength());
 	}
 
 }

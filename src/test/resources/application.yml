@@ -6,6 +6,8 @@ spring:
     hikari:
       maximumPoolSize: 2
 
+maxTimeSeriesCorrectedData: 10
+
 logging:
   level:
     org.postgresql: DEBUG
