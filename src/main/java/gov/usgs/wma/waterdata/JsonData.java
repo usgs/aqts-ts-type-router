@@ -36,4 +36,8 @@ public class JsonData {
 	public void setContentLength(Long contentLength) {
 		this.contentLength = contentLength;
 	}
+	@Override
+	public String toString() {
+		return String.join(";", id.toString(), String.valueOf(responseCode), serviceName, scriptName, contentLength.toString());
+	}
 }
