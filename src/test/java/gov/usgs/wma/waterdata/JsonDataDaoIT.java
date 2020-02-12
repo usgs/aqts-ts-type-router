@@ -1,10 +1,8 @@
 package gov.usgs.wma.waterdata;
 
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-
-import java.io.IOException;
-
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +10,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase.Replace;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.context.SpringBootTest.WebEnvironment;
-import org.springframework.context.annotation.Import;
 import org.springframework.test.annotation.DirtiesContext;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.TestExecutionListeners;
@@ -28,8 +25,6 @@ import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 
 @SpringBootTest(webEnvironment=WebEnvironment.NONE,
 	classes={DBTestConfig.class, JsonDataDao.class})
-@DatabaseSetup("classpath:/testData/")
-
 @ActiveProfiles("it")
 @TestExecutionListeners({ DependencyInjectionTestExecutionListener.class,
 	DirtiesContextTestExecutionListener.class,
@@ -38,16 +33,15 @@ import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 @DbUnitConfiguration(dataSetLoader=FileSensingDataSetLoader.class)
 @AutoConfigureTestDatabase(replace=Replace.NONE)
 @Transactional(propagation=Propagation.NOT_SUPPORTED)
-@Import({DBTestConfig.class})
 @DirtiesContext
-
+@DatabaseSetup("classpath:/testData/")
 public class JsonDataDaoIT {
 
 	@Autowired
-	private JsonDataDao jsonDataDao;
+	JsonDataDao jsonDataDao;
 
 	@Test
-	public void foundTest() throws IOException {
+	public void foundTest() {
 		JsonData jsonData = jsonDataDao.getJsonData(Long.valueOf(1));
 		assertNotNull(jsonData);
 		assertEquals(1, jsonData.getId());
@@ -57,4 +51,9 @@ public class JsonDataDaoIT {
 		assertEquals(Long.valueOf(8), jsonData.getContentLength());
 	}
 
+	@Test
+	public void notFoundTest() {
+		JsonData jsonData = jsonDataDao.getJsonData(Long.valueOf(0));
+		assertNull(jsonData);
+	}
 }

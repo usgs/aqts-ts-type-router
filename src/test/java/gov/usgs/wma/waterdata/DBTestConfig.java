@@ -17,7 +17,7 @@ import com.github.springtestdbunit.bean.DatabaseDataSourceConnectionFactoryBean;
 public class DBTestConfig {
 
 	@Autowired
-	public DataSource dataSource;
+	private DataSource dataSource;
 
 	@Value("${AQTS_SCHEMA_NAME}")
 	private String schemaName;

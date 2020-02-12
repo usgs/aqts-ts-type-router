@@ -12,7 +12,6 @@ import org.springframework.stereotype.Component;
 public class DetermineRoute implements Function<RequestObject, ResultObject> {
 	private static final Logger LOG = LoggerFactory.getLogger(DetermineRoute.class);
 
-	@Value("${maxTimeSeriesCorrectedData}")
 	private Long maxTimeSeriesCorrectedData;
 
 	private JsonDataDao jsonDataDao;
@@ -28,8 +27,10 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 	public static final String TS_CORRECTED_DATA = "tsCorrectedData";
 
 	@Autowired
-	public DetermineRoute(JsonDataDao jsonDataDao) {
+	public DetermineRoute(JsonDataDao jsonDataDao,
+			@Value("${maxTimeSeriesCorrectedData}") Long maxTimeSeriesCorrectedData) {
 		this.jsonDataDao = jsonDataDao;
+		this.maxTimeSeriesCorrectedData = maxTimeSeriesCorrectedData;
 	}
 
 	@Override
@@ -46,14 +47,8 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 
 	protected String determineType(Long id) {
 		String type = ERROR;
-		JsonData jsonData = null;
-		try {
-			jsonData = jsonDataDao.getJsonData(id);
-			LOG.debug("jsonData: {}", jsonData);
-		} catch (Exception e) {
-			LOG.error("Issue getting json_data record.", e);
-		}
-		LOG.debug("here");
+		JsonData jsonData = jsonDataDao.getJsonData(id);
+		LOG.debug("jsonData: {}", jsonData);
 		if (null != jsonData
 				&& 200 == jsonData.getResponseCode()
 				&& GET_TS_DATA.equalsIgnoreCase(jsonData.getScriptName())) {
