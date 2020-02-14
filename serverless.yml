@@ -43,4 +43,4 @@ functions:
     vpc: ${self:custom.vpc}
 
 package:
-  artifact: /build/target/aqts-ts-type-router-aws.jar
+  artifact: aqts-ts-type-router-aws.jar

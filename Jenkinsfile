@@ -14,12 +14,13 @@ pipeline {
         }
       }
     }
-    stage('build the zip file for lambda consumption') {
+    stage('get and install the zip file for lambda consumption') {
       agent {
         dockerfile true
       }
       steps {
         sh '''
+          curl ${SHADED_JAR_ARTIFACT_URL} -Lo aqts-ts-type-router-aws.ja
           ls -al
           npm install serverless
           ls -al
