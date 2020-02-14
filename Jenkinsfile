@@ -20,12 +20,19 @@ pipeline {
       }
       steps {
         sh '''
-          curl ${SHADED_JAR_ARTIFACT_URL} -Lo aqts-ts-type-router-aws.ja
+          curl ${SHADED_JAR_ARTIFACT_URL} -Lo aqts-ts-type-router-aws.jar
           ls -al
           npm install serverless
           ls -al
           ./node_modules/serverless/bin/serverless deploy --stage ${DEPLOY_STAGE}
           '''
+      }
+    }
+  }
+  post {
+    always {
+      script {
+        pipelineUtils.cleanWorkspace()
       }
     }
   }
