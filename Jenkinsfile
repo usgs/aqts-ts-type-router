@@ -29,11 +29,4 @@ pipeline {
       }
     }
   }
-  post {
-    always {
-      script {
-        pipelineUtils.cleanWorkspace()
-      }
-    }
-  }
 }
