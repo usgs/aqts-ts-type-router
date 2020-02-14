@@ -14,7 +14,7 @@ provider:
     "wma:applicationId": "AQTS Time Series Type Router"
     "wma:contact": "Jim Kreft jkreft@usgs.gov"
     "wma:environment": ${self:provider.stage}
-    "wma:taggingVersion": 0.0.1
+    "wma:taggingVersion": ${opt:taggingVersion}
     "wma:costCenter": TBD
 
 custom:

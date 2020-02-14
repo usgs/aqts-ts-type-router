@@ -1,10 +1,9 @@
 # Aquarius Timeseries (AQTS) Timeseries Type Router
 
 [![Build Status](https://travis-ci.com/usgs/aqts-ts-type-router.svg?branch=master)](https://travis-ci.com/usgs/aqts-ts-type-router)
+[![codecov](https://codecov.io/gh/usgs/aqts-ts-type-router/branch/master/graph/badge.svg)](https://codecov.io/gh/usgs/aqts-ts-type-router)
 
 Read the AQTS Capture database to determine the appropriate next step in transforming data for the Observations service.
-
-blah, blah, blah
 
 ## Testing
 This project contains JUnit tests. Maven can be used to run them (in addition to the capabilities of your IDE).
