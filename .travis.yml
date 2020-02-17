@@ -12,7 +12,19 @@ install: true
 
 script:
   - docker network create aqtsNet
-  - docker run --rm -v /var/run/docker.sock:/var/run/docker.sock -v "$TRAVIS_BUILD_DIR":/usr/src/mymaven -w /usr/src/mymaven --network=aqtsNet -e TESTING_DATABASE_PORT=5432 -e TESTING_DATABASE_ADDRESS=aqtsDb -e TESTING_DATABASE_NETWORK=aqtsNet maven:3.6.0-jdk-11 mvn clean verify
+  - |
+    docker \
+    run \
+    --rm \
+    -v /var/run/docker.sock:/var/run/docker.sock \
+    -v "$TRAVIS_BUILD_DIR":/usr/src/mymaven \
+    -w /usr/src/mymaven \
+    --network=aqtsNet \
+    -e TESTING_DATABASE_PORT=5432 \
+    -e TESTING_DATABASE_ADDRESS=aqtsDb \
+    -e TESTING_DATABASE_NETWORK=aqtsNet \
+    -e ROOT_LOG_LEVEL=INFO \
+    maven:3.6.0-jdk-11 mvn clean verify
   - docker network rm aqtsNet
 
 after_success:
