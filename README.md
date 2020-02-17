@@ -26,7 +26,7 @@ mvn package
 To additionally start up a Docker database and run the integration tests of the application use:
 
 ```.sh
-mvn verify -DTESTING_DATABASE_PORT=5437 -DTESTING_DATABASE_ADDRESS=localhost -DTESTING_DATABASE_NETWORK=wdfn
+mvn verify -DTESTING_DATABASE_PORT=5437 -DTESTING_DATABASE_ADDRESS=localhost -DTESTING_DATABASE_NETWORK=wdfn -DROOT_LOG_LEVEL=INFO
 ```
 
 ### LocalStack
