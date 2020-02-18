@@ -4,7 +4,7 @@ spring:
     username: ${AQTS_SCHEMA_OWNER_USERNAME}
     password: ${AQTS_SCHEMA_OWNER_PASSWORD}
     hikari:
-      maximumPoolSize: 3
+      maximum-pool-size: 3
 
 maxTimeSeriesCorrectedData: ${MAX_TIME_SERIES_CORRECTED_DATA}
 
