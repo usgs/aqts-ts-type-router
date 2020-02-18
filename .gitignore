@@ -1,0 +1,7 @@
+/.settings/
+/target/
+/.attach_pid*
+/.classpath
+/.flattened-pom.xml
+/.project
+/application.yml

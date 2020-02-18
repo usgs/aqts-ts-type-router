@@ -1,0 +1,14 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${AQTS_DATABASE_ADDRESS}:${AQTS_DATABASE_PORT}/${AQTS_DATABASE_NAME}?currentSchema=${AQTS_SCHEMA_NAME}
+    username: ${AQTS_SCHEMA_OWNER_USERNAME}
+    password: ${AQTS_SCHEMA_OWNER_PASSWORD}
+    hikari:
+      maximum-pool-size: 2
+
+maxTimeSeriesCorrectedData: 10
+
+logging:
+  level:
+    root: ${ROOT_LOG_LEVEL}
+    com.zaxxer: OFF
