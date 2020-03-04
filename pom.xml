@@ -13,7 +13,7 @@
         <wma.maven.url>https://cida.usgs.gov/artifactory</wma.maven.url>
         <aws-lambda-events.version>2.2.7</aws-lambda-events.version>
         <aws-lambda-java-core.version>1.2.0</aws-lambda-java-core.version>
-        <spring-cloud-function.version>3.0.2.RELEASE</spring-cloud-function.version>
+        <spring-cloud-function.version>3.0.3.RELEASE</spring-cloud-function.version>
         <spring-boot-thin.version>1.0.23.RELEASE</spring-boot-thin.version>
         <mybatis-spring-version>2.0.3</mybatis-spring-version>
         <mybatis-version>3.5.3</mybatis-version>
