@@ -26,9 +26,9 @@ public class JsonDataDao {
 		JsonData jsonData = null;
 		try {
 			String sql = new String(FileCopyUtils.copyToByteArray(sqlFile.getInputStream()));
-			jsonData =  jdbcTemplate.queryForObject(sql,
-					new Object[] {jsonDataId},
-					new JsonDataRowMapper()
+			jsonData = jdbcTemplate.queryForObject(sql,
+					new JsonDataRowMapper(),
+					jsonDataId
 				);
 		} catch (EmptyResultDataAccessException e) {
 			LOG.info("Couldn't find {} - {}", jsonDataId, e.getLocalizedMessage());

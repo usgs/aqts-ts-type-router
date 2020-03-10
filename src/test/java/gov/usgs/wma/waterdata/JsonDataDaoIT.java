@@ -38,7 +38,7 @@ import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 public class JsonDataDaoIT {
 
 	@Autowired
-	JsonDataDao jsonDataDao;
+	private JsonDataDao jsonDataDao;
 
 	@Test
 	public void foundTest() {
