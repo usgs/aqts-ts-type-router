@@ -42,7 +42,7 @@ functions:
       MAX_TIME_SERIES_CORRECTED_DATA: 2036854775808
     vpc: ${self:custom.vpc}
 
-  resources:
+resources:
   Resources:
     snsTopic:
       Type: AWS::SNS::Topic
