@@ -22,7 +22,7 @@ pipeline {
         sh '''
           curl ${SHADED_JAR_ARTIFACT_URL} -Lo aqts-ts-type-router-aws.jar
           ls -al
-          npm install serverless
+          npm install
           ls -al
           ./node_modules/serverless/bin/serverless deploy --stage ${DEPLOY_STAGE} --taggingVersion ${SHADED_JAR_VERSION}
           '''
