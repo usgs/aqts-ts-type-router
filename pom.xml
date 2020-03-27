@@ -10,7 +10,6 @@
     <properties>
         <java.version>11</java.version>
         <revision>0-DEFAULT</revision>
-        <wma.maven.url>https://artifactory.wma.chs.usgs.gov/artifactory</wma.maven.url>
         <aws-lambda-events.version>2.2.7</aws-lambda-events.version>
         <aws-lambda-java-core.version>1.2.0</aws-lambda-java-core.version>
         <spring-cloud-function.version>3.0.3.RELEASE</spring-cloud-function.version>
@@ -44,30 +43,12 @@
         <tag>HEAD</tag>
     </scm>
 
-    <repositories>
-        <repository>
-            <id>Central</id>
-            <name>Maven Central</name>
-            <url>https://repo.maven.apache.org/maven2/</url>
-        </repository>
-        <repository>
-            <id>WMA</id>
-            <name>WMA Artifactory</name>
-            <url>${wma.maven.url}/list/wma-maven-centralized/</url>
-        </repository>
-    </repositories>
-
     <distributionManagement>
         <repository>
             <id>wma-maven-releases</id>
             <name>wma-maven-releases</name>
             <url>${wma.maven.url}/wma-maven-releases</url>
         </repository>
-        <snapshotRepository>
-            <id>wma-maven-snapshots</id>
-            <name>wma-maven-snapshots</name>
-            <url>${wma.maven.url}/wma-maven-snapshots</url>
-        </snapshotRepository>
     </distributionManagement>
 
     <parent>
