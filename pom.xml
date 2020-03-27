@@ -10,7 +10,7 @@
     <properties>
         <java.version>11</java.version>
         <revision>0-DEFAULT</revision>
-        <wma.maven.url>https://cida.usgs.gov/artifactory</wma.maven.url>
+        <wma.maven.url>https://artifactory.wma.chs.usgs.gov/artifactory</wma.maven.url>
         <aws-lambda-events.version>2.2.7</aws-lambda-events.version>
         <aws-lambda-java-core.version>1.2.0</aws-lambda-java-core.version>
         <spring-cloud-function.version>3.0.3.RELEASE</spring-cloud-function.version>
