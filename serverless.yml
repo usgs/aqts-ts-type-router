@@ -16,8 +16,10 @@ provider:
     "wma:environment": ${self:provider.stage}
     "wma:taggingVersion": ${opt:taggingVersion}
     "wma:costCenter": TBD
+    commitIdentifier: ${git:sha1}
 
 custom:
+  exportGitVariables: false
   accountNumber : ${ssm:/iow/aws/accountNumber}
   vpc:
     securityGroupIds: ${ssm:/iow/retriever-capture/${self:provider.stage}/securityGroupIds~split}
@@ -60,7 +62,7 @@ resources:
             Value:
               Ref: DetermineRouteLambdaFunction
         MetricName: ConcurrentExecutions
-        Statistic: Sum
+        Statistic: Maximum
         ComparisonOperator: GreaterThanOrEqualToThreshold
         Threshold: 150
         Period: 60
@@ -85,6 +87,9 @@ resources:
         EvaluationPeriods: 1
         AlarmActions:
           - Ref: snsTopic
+
+plugins:
+  - serverless-plugin-git-variables
 
 package:
   artifact: aqts-ts-type-router-aws.jar
