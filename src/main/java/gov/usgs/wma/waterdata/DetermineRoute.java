@@ -17,6 +17,7 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 	private JsonDataDao jsonDataDao;
 	// Script Names
 	public static final String GET_TS_DATA = "getTSData";
+	public static final String GET_TS_DESCRIPTIONS = "getTSDescriptions";
 	// Web Service Endpoints
 	public static final String GET_TS_DESCRIPTION_LIST = "GetTimeSeriesDescriptionListByUniqueId";
 	public static final String GET_TS_CORRECTED_DATA = "GetTimeSeriesCorrectedData";
@@ -51,7 +52,8 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 		LOG.debug("jsonData: {}", jsonData);
 		if (null != jsonData
 				&& 200 == jsonData.getResponseCode()
-				&& GET_TS_DATA.equalsIgnoreCase(jsonData.getScriptName())) {
+				&& (GET_TS_DATA.equalsIgnoreCase(jsonData.getScriptName())
+						|| GET_TS_DESCRIPTIONS.equalsIgnoreCase(jsonData.getScriptName()))) {
 			switch (jsonData.getServiceName()) {
 			case GET_TS_DESCRIPTION_LIST:
 				type = TS_DESCRIPTION_LIST;
