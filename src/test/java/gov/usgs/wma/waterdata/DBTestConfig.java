@@ -31,6 +31,7 @@ public class DBTestConfig {
 	public DatabaseConfigBean dbUnitDatabaseConfig() {
 		DatabaseConfigBean dbUnitDbConfig = new DatabaseConfigBean();
 		dbUnitDbConfig.setDatatypeFactory(new TSDataTypeFactory());
+		dbUnitDbConfig.setTableType(new String[] {"PARTITIONED TABLE", "TABLE"});
 		return dbUnitDbConfig;
 	}
 
