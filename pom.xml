@@ -4,7 +4,7 @@
 
     <groupId>gov.usgs.wma.waterdata</groupId>
     <artifactId>aqts-ts-type-router</artifactId>
-    <version>0.2.${revision}</version>
+    <version>0.3.${revision}</version>
     <packaging>jar</packaging>
 
     <properties>
