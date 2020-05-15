@@ -5,7 +5,6 @@ public class JsonData {
 	private int responseCode;
 	private String serviceName;
 	private String scriptName;
-	private Long contentLength;
 	public Long getId() {
 		return id;
 	}
@@ -30,14 +29,8 @@ public class JsonData {
 	public void setScriptName(String scriptName) {
 		this.scriptName = scriptName;
 	}
-	public Long getContentLength() {
-		return contentLength;
-	}
-	public void setContentLength(Long contentLength) {
-		this.contentLength = contentLength;
-	}
 	@Override
 	public String toString() {
-		return String.join(";", id.toString(), String.valueOf(responseCode), serviceName, scriptName, contentLength.toString());
+		return String.join(";", id.toString(), String.valueOf(responseCode), serviceName, scriptName);
 	}
 }

@@ -41,7 +41,6 @@ functions:
       AQTS_SCHEMA_OWNER_PASSWORD: ${self:custom.db.connectInfo.SCHEMA_OWNER_PASSWORD}
       AWS_DEPLOYMENT_REGION: ${self:provider.region}
       ROOT_LOG_LEVEL: INFO
-      MAX_TIME_SERIES_CORRECTED_DATA: 2036854775808
     vpc: ${self:custom.vpc}
 
 resources:

@@ -48,12 +48,21 @@ public class JsonDataDaoIT {
 		assertEquals(200, jsonData.getResponseCode());
 		assertEquals(DetermineRoute.GET_TS_DESCRIPTION_LIST, jsonData.getServiceName());
 		assertEquals(DetermineRoute.GET_TS_DATA, jsonData.getScriptName());
-		assertEquals(Long.valueOf(8), jsonData.getContentLength());
 	}
 
 	@Test
 	public void notFoundTest() {
 		JsonData jsonData = jsonDataDao.getJsonData(Long.valueOf(0));
 		assertNull(jsonData);
+	}
+
+	@Test
+	public void foundFieldVisitSiteDataTest() {
+		JsonData jsonData = jsonDataDao.getJsonData(Long.valueOf(13));
+		assertNotNull(jsonData);
+		assertEquals(13, jsonData.getId());
+		assertEquals(200, jsonData.getResponseCode());
+		assertEquals(DetermineRoute.GET_FIELD_VISIT_DATA_BY_LOCATION, jsonData.getServiceName());
+		assertEquals(DetermineRoute.GET_TS_SITE_VISIT, jsonData.getScriptName());
 	}
 }

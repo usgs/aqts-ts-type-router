@@ -5,3 +5,5 @@
 /.flattened-pom.xml
 /.project
 /application.yml
+/aqts-ts-type-router.iml
+/.idea

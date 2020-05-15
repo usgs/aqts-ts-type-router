@@ -5,8 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.mockito.ArgumentMatchers.anyLong;
 import static org.mockito.Mockito.when;
 
-import java.io.IOException;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -23,13 +21,13 @@ public class DetermineRouteTest {
 
 	@BeforeEach
 	public void beforeEach() {
-		determineRoute = new DetermineRoute(jsonDataDao, Long.valueOf(50));
+		determineRoute = new DetermineRoute(jsonDataDao);
 		request = new RequestObject();
 		request.setId(Long.valueOf(1));
 	}
 
 	@Test
-	public void notFoundAtAllTest() throws IOException {
+	public void notFoundAtAllTest() {
 		when(jsonDataDao.getJsonData(anyLong())).thenReturn(null);
 		ResultObject result = determineRoute.apply(request);
 		assertNotNull(result);
@@ -38,7 +36,7 @@ public class DetermineRouteTest {
 	}
 
 	@Test
-	public void foundGenericTest() throws IOException {
+	public void foundGenericTest() {
 		when(jsonDataDao.getJsonData(anyLong())).thenReturn(new JsonData());
 		ResultObject result = determineRoute.apply(request);
 		assertNotNull(result);
@@ -47,7 +45,7 @@ public class DetermineRouteTest {
 	}
 
 	@Test
-	public void foundWrongScriptTest() throws IOException {
+	public void foundWrongScriptTest() {
 		JsonData jsonData = new JsonData();
 		jsonData.setResponseCode(200);
 		jsonData.setScriptName("abd");
@@ -59,7 +57,7 @@ public class DetermineRouteTest {
 	}
 
 	@Test
-	public void foundTSDescriptionTest() throws IOException {
+	public void foundTSDescriptionTest() {
 		JsonData jsonData = new JsonData();
 		jsonData.setResponseCode(200);
 		jsonData.setScriptName(DetermineRoute.GET_TS_DATA);
@@ -72,12 +70,11 @@ public class DetermineRouteTest {
 	}
 
 	@Test
-	public void foundTSCorrectedDataTest() throws IOException {
+	public void foundTSCorrectedDataTest() {
 		JsonData jsonData = new JsonData();
 		jsonData.setResponseCode(200);
 		jsonData.setScriptName(DetermineRoute.GET_TS_DATA);
 		jsonData.setServiceName(DetermineRoute.GET_TS_CORRECTED_DATA);
-		jsonData.setContentLength(Long.valueOf(1));
 		when(jsonDataDao.getJsonData(anyLong())).thenReturn(jsonData);
 		ResultObject result = determineRoute.apply(request);
 		assertNotNull(result);
@@ -86,21 +83,20 @@ public class DetermineRouteTest {
 	}
 
 	@Test
-	public void foundTSCorrectedDataTooLongTest() throws IOException {
+	public void foundFieldVisitDataTest() {
 		JsonData jsonData = new JsonData();
 		jsonData.setResponseCode(200);
-		jsonData.setScriptName(DetermineRoute.GET_TS_DATA);
-		jsonData.setServiceName(DetermineRoute.GET_TS_CORRECTED_DATA);
-		jsonData.setContentLength(Long.valueOf(10000));
+		jsonData.setScriptName(DetermineRoute.GET_TS_SITE_VISIT);
+		jsonData.setServiceName(DetermineRoute.GET_FIELD_VISIT_DATA_BY_LOCATION);
 		when(jsonDataDao.getJsonData(anyLong())).thenReturn(jsonData);
 		ResultObject result = determineRoute.apply(request);
 		assertNotNull(result);
 		assertEquals(Long.valueOf(1), result.getId());
-		assertEquals(DetermineRoute.ERROR, result.getType());
+		assertEquals(DetermineRoute.FIELD_VISIT_DATA, result.getType());
 	}
 
 	@Test
-	public void foundSomethingElseTest() throws IOException {
+	public void foundSomethingElseTest() {
 		JsonData jsonData = new JsonData();
 		jsonData.setResponseCode(200);
 		jsonData.setScriptName(DetermineRoute.GET_TS_DATA);
