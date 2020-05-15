@@ -14,7 +14,6 @@ public class JsonDataRowMapper implements RowMapper<JsonData> {
 		jsonData.setResponseCode(rs.getInt("response_code"));
 		jsonData.setServiceName(rs.getString("service_name"));
 		jsonData.setScriptName(rs.getString("script_name"));
-		jsonData.setContentLength(rs.getLong("content_length"));
 		return jsonData;
 	}
 
