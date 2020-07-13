@@ -4,3 +4,4 @@ select json_data_id,
        script_name
   from json_data
  where json_data_id = ?
+   and partition_number = ?

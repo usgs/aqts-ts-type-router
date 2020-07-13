@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -37,31 +38,47 @@ import com.github.springtestdbunit.annotation.DbUnitConfiguration;
 @DatabaseSetup("classpath:/testData/")
 public class JsonDataDaoIT {
 
+	public static final Long JSON_DATA_ID_1 = 1L;
+	public static final Long JSON_DATA_ID_0 = 0L;
+	public static final Long JSON_DATA_ID_13 = 13L;
+	public static final Integer PARTITION_NUMBER = 7;
+	public static final int RESPONSE_CODE_SUCCESS = 200;
+
 	@Autowired
 	private JsonDataDao jsonDataDao;
+	private RequestObject request;
+
+	@BeforeEach
+	public void beforeEach() {
+		request = new RequestObject();
+		request.setPartitionNumber(PARTITION_NUMBER);
+	}
 
 	@Test
 	public void foundTest() {
-		JsonData jsonData = jsonDataDao.getJsonData(Long.valueOf(1));
+		request.setId(JSON_DATA_ID_1);
+		JsonData jsonData = jsonDataDao.getJsonData(request);
 		assertNotNull(jsonData);
-		assertEquals(1, jsonData.getId());
-		assertEquals(200, jsonData.getResponseCode());
+		assertEquals(JSON_DATA_ID_1, jsonData.getId());
+		assertEquals(RESPONSE_CODE_SUCCESS, jsonData.getResponseCode());
 		assertEquals(DetermineRoute.GET_TS_DESCRIPTION_LIST, jsonData.getServiceName());
 		assertEquals(DetermineRoute.GET_TS_DATA, jsonData.getScriptName());
 	}
 
 	@Test
 	public void notFoundTest() {
-		JsonData jsonData = jsonDataDao.getJsonData(Long.valueOf(0));
+		request.setId(JSON_DATA_ID_0);
+		JsonData jsonData = jsonDataDao.getJsonData(request);
 		assertNull(jsonData);
 	}
 
 	@Test
 	public void foundFieldVisitSiteDataTest() {
-		JsonData jsonData = jsonDataDao.getJsonData(Long.valueOf(13));
+		request.setId(JSON_DATA_ID_13);
+		JsonData jsonData = jsonDataDao.getJsonData(request);
 		assertNotNull(jsonData);
-		assertEquals(13, jsonData.getId());
-		assertEquals(200, jsonData.getResponseCode());
+		assertEquals(JSON_DATA_ID_13, jsonData.getId());
+		assertEquals(RESPONSE_CODE_SUCCESS, jsonData.getResponseCode());
 		assertEquals(DetermineRoute.GET_FIELD_VISIT_DATA_BY_LOCATION, jsonData.getServiceName());
 		assertEquals(DetermineRoute.GET_TS_SITE_VISIT, jsonData.getScriptName());
 	}
