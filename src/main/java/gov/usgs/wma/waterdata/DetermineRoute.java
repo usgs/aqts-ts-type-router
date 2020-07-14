@@ -39,13 +39,13 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 	protected ResultObject processRequest(RequestObject request) {
 		ResultObject result = new ResultObject();
 		result.setId(request.getId());
-		result.setType(determineType(request.getId()));
+		result.setType(determineType(request));
 		return result;
 	}
 
-	protected String determineType(Long id) {
+	protected String determineType(RequestObject request) {
 		String type = OTHER;
-		JsonData jsonData = jsonDataDao.getJsonData(id);
+		JsonData jsonData = jsonDataDao.getJsonData(request);
 		LOG.debug("jsonData: {}", jsonData);
 		if (null != jsonData
 				&& 200 == jsonData.getResponseCode()

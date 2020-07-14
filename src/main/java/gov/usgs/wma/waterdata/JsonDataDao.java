@@ -22,16 +22,17 @@ public class JsonDataDao {
 	@Value("classpath:sql/jsonData.sql")
 	private Resource sqlFile;
 
-	public JsonData getJsonData(Long jsonDataId) {
+	public JsonData getJsonData(RequestObject request) {
 		JsonData jsonData = null;
 		try {
 			String sql = new String(FileCopyUtils.copyToByteArray(sqlFile.getInputStream()));
 			jsonData = jdbcTemplate.queryForObject(sql,
 					new JsonDataRowMapper(),
-					jsonDataId
+					request.getId(),
+					request.getPartitionNumber()
 				);
 		} catch (EmptyResultDataAccessException e) {
-			LOG.info("Couldn't find {} - {}", jsonDataId, e.getLocalizedMessage());
+			LOG.info("Couldn't find {} - {}", request.getId(), e.getLocalizedMessage());
 		} catch (IOException e) {
 			LOG.error("Unable to get SQL statement", e);
 			throw new RuntimeException(e);
