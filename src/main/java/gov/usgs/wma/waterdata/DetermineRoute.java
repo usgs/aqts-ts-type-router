@@ -39,7 +39,6 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 	protected ResultObject processRequest(RequestObject request) {
 		ResultObject result = new ResultObject();
 		result.setId(request.getId());
-		result.setPartitionNumber(request.getPartitionNumber());
 		result.setType(determineType(request));
 		return result;
 	}

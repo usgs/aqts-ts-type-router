@@ -45,7 +45,6 @@ public class DetermineRouteTest {
 		assertNotNull(result);
 		assertEquals(JsonDataDaoIT.JSON_DATA_ID_1, result.getId());
 		assertEquals(DetermineRoute.OTHER, result.getType());
-		assertEquals(JsonDataDaoIT.PARTITION_NUMBER, result.getPartitionNumber());
 	}
 
 	@Test
@@ -58,7 +57,6 @@ public class DetermineRouteTest {
 		assertNotNull(result);
 		assertEquals(JsonDataDaoIT.JSON_DATA_ID_1, result.getId());
 		assertEquals(DetermineRoute.OTHER, result.getType());
-		assertEquals(JsonDataDaoIT.PARTITION_NUMBER, result.getPartitionNumber());
 	}
 
 	@Test
@@ -72,7 +70,6 @@ public class DetermineRouteTest {
 		assertNotNull(result);
 		assertEquals(JsonDataDaoIT.JSON_DATA_ID_1, result.getId());
 		assertEquals(DetermineRoute.TS_DESCRIPTION_LIST, result.getType());
-		assertEquals(JsonDataDaoIT.PARTITION_NUMBER, result.getPartitionNumber());
 	}
 
 	@Test
@@ -86,7 +83,6 @@ public class DetermineRouteTest {
 		assertNotNull(result);
 		assertEquals(JsonDataDaoIT.JSON_DATA_ID_1, result.getId());
 		assertEquals(DetermineRoute.TS_CORRECTED_DATA, result.getType());
-		assertEquals(JsonDataDaoIT.PARTITION_NUMBER, result.getPartitionNumber());
 	}
 
 	@Test
@@ -100,7 +96,6 @@ public class DetermineRouteTest {
 		assertNotNull(result);
 		assertEquals(JsonDataDaoIT.JSON_DATA_ID_1, result.getId());
 		assertEquals(DetermineRoute.FIELD_VISIT_DATA, result.getType());
-		assertEquals(JsonDataDaoIT.PARTITION_NUMBER, result.getPartitionNumber());
 	}
 
 	@Test
@@ -114,6 +109,5 @@ public class DetermineRouteTest {
 		assertNotNull(result);
 		assertEquals(JsonDataDaoIT.JSON_DATA_ID_1, result.getId());
 		assertEquals(DetermineRoute.OTHER, result.getType());
-		assertEquals(JsonDataDaoIT.PARTITION_NUMBER, result.getPartitionNumber());
 	}
 }
