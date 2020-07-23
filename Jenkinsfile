@@ -26,7 +26,7 @@ pipeline {
           ls -al
           npm install
           ls -al
-          ./node_modules/serverless/bin/serverless deploy --stage ${DEPLOY_STAGE} --taggingVersion ${SHADED_JAR_VERSION}
+          ./node_modules/serverless/bin/serverless.js deploy --stage ${DEPLOY_STAGE} --taggingVersion ${SHADED_JAR_VERSION}
           '''
       }
     }
