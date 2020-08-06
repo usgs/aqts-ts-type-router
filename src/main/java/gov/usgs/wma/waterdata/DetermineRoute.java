@@ -20,11 +20,13 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 	public static final String GET_TS_DESCRIPTION_LIST = "GetTimeSeriesDescriptionListByUniqueId";
 	public static final String GET_TS_CORRECTED_DATA = "GetTimeSeriesCorrectedData";
 	public static final String GET_FIELD_VISIT_DATA_BY_LOCATION = "GetFieldVisitDataByLocation";
+	public static final String GET_FIELD_VISIT_READINGS_BY_LOCATION = "GetFieldVisitReadingsByLocation";
 	// Router Types
 	public static final String OTHER = "other";
 	public static final String TS_DESCRIPTION_LIST = "tsDescriptionList";
 	public static final String TS_CORRECTED_DATA = "tsCorrectedData";
 	public static final String FIELD_VISIT_DATA = "fieldVisitData";
+	public static final String FIELD_VISIT_READINGS = "fieldVisitReadings";
 
 	@Autowired
 	public DetermineRoute(JsonDataDao jsonDataDao) {
@@ -61,6 +63,9 @@ public class DetermineRoute implements Function<RequestObject, ResultObject> {
 				break;
 			case GET_FIELD_VISIT_DATA_BY_LOCATION:
 				type = FIELD_VISIT_DATA;
+				break;
+			case GET_FIELD_VISIT_READINGS_BY_LOCATION:
+				type = FIELD_VISIT_READINGS;
 				break;
 			default:
 				type = OTHER;
