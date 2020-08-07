@@ -99,6 +99,19 @@ public class DetermineRouteTest {
 	}
 
 	@Test
+	public void foundFieldVisitReadingsTest() {
+		JsonData jsonData = new JsonData();
+		jsonData.setResponseCode(JsonDataDaoIT.RESPONSE_CODE_SUCCESS);
+		jsonData.setScriptName(DetermineRoute.GET_TS_SITE_VISIT);
+		jsonData.setServiceName(DetermineRoute.GET_FIELD_VISIT_READINGS_BY_LOCATION);
+		when(jsonDataDao.getJsonData(any())).thenReturn(jsonData);
+		ResultObject result = determineRoute.apply(request);
+		assertNotNull(result);
+		assertEquals(JsonDataDaoIT.JSON_DATA_ID_1, result.getId());
+		assertEquals(DetermineRoute.FIELD_VISIT_READINGS, result.getType());
+	}
+
+	@Test
 	public void foundSomethingElseTest() {
 		JsonData jsonData = new JsonData();
 		jsonData.setResponseCode(JsonDataDaoIT.RESPONSE_CODE_SUCCESS);
