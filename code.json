@@ -3,7 +3,7 @@
     "name": "Time Series Type Router",
     "organization": "U.S. Geological Survey",
     "description": "Time series type router for ETL from Aquarius Timeseries to WDFN",
-    "version": "0.4.${revision}",
+    "version": "0.5.${revision}",
     "status": "Development",
 
     "permissions": {
