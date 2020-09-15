@@ -10,7 +10,7 @@
     <properties>
         <java.version>11</java.version>
         <revision>0-DEFAULT</revision>
-        <aws-lambda-events.version>3.1.1</aws-lambda-events.version>
+        <aws-lambda-events.version>3.3.0</aws-lambda-events.version>
         <aws-lambda-java-core.version>1.2.1</aws-lambda-java-core.version>
         <spring-cloud-function.version>3.0.9.RELEASE</spring-cloud-function.version>
         <spring-boot-thin.version>1.0.25.RELEASE</spring-boot-thin.version>
