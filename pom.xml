@@ -10,9 +10,9 @@
     <properties>
         <java.version>11</java.version>
         <revision>0-DEFAULT</revision>
-        <aws-lambda-events.version>3.1.1</aws-lambda-events.version>
+        <aws-lambda-events.version>3.4.0</aws-lambda-events.version>
         <aws-lambda-java-core.version>1.2.1</aws-lambda-java-core.version>
-        <spring-cloud-function.version>3.0.9.RELEASE</spring-cloud-function.version>
+        <spring-cloud-function.version>3.0.10.RELEASE</spring-cloud-function.version>
         <spring-boot-thin.version>1.0.25.RELEASE</spring-boot-thin.version>
         <mybatis-spring-version>2.0.3</mybatis-spring-version>
         <mybatis-version>3.5.3</mybatis-version>
@@ -54,7 +54,7 @@
     <parent>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-parent</artifactId>
-        <version>2.3.2.RELEASE</version>
+        <version>2.3.4.RELEASE</version>
     </parent>
 
     <dependencies>
@@ -213,7 +213,7 @@
             <plugin>
                 <groupId>io.fabric8</groupId>
                 <artifactId>docker-maven-plugin</artifactId>
-                <version>0.33.0</version>
+                <version>0.34.1</version>
                 <executions>
                     <execution>
                         <id>start</id>
@@ -257,7 +257,7 @@
             <plugin>
                 <groupId>org.jacoco</groupId>
                 <artifactId>jacoco-maven-plugin</artifactId>
-                <version>0.8.5</version>
+                <version>0.8.6</version>
                 <executions>
                     <execution>
                         <goals>
