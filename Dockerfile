@@ -1,5 +1,6 @@
 FROM usgswma/python:3.8
 
+RUN apt-get update
 RUN apt-get install --no-install-recommends -y curl git dnsutils
 RUN curl -sL https://deb.nodesource.com/setup_12.x | bash - && apt-get install -y nodejs
 
