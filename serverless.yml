@@ -9,7 +9,7 @@ provider:
   timeout: 60
   logRetentionInDays: 90
   deploymentBucket:
-    name: iow-cloud-applications
+    name: ${opt:bucket, iow-cloud-applications}
   stackTags:
     "wma:applicationId": "AQTS Time Series Type Router"
     "wma:contact": "Jim Kreft jkreft@usgs.gov"
@@ -22,7 +22,6 @@ provider:
 
 custom:
   exportGitVariables: false
-  accountNumber : ${ssm:/iow/aws/accountNumber}
   vpc:
     securityGroupIds: ${ssm:/iow/retriever-capture/${self:provider.stage}/securityGroupIds~split}
     subnetIds: ${ssm:/iow/aws/vpc/${self:provider.stage}/subnetIds~split}
@@ -32,7 +31,7 @@ custom:
 functions:
   determineRoute:
     handler: gov.usgs.wma.waterdata.DetermineRouteHandler
-    role: arn:aws:iam::${self:custom.accountNumber}:role/csr-Lambda-Role
+    role: arn:aws:iam::#{AWS::AccountId}:role/csr-Lambda-Role
     environment:
       FUNCTION_NAME: determineRoute
       AQTS_DATABASE_ADDRESS: ${self:custom.db.connectInfo.DATABASE_ADDRESS}
@@ -91,6 +90,7 @@ resources:
 
 plugins:
   - serverless-plugin-git-variables
+  - serverless-pseudo-parameters
 
 package:
   artifact: aqts-ts-type-router-aws.jar

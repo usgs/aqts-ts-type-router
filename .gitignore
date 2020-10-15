@@ -7,3 +7,5 @@
 /application.yml
 /aqts-ts-type-router.iml
 /.idea
+.serverless/
+node_modules/
