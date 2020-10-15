@@ -16,6 +16,8 @@ provider:
     "wma:environment": ${self:provider.stage}
     "wma:taggingVersion": ${opt:taggingVersion}
     "wma:costCenter": TBD
+    "wma:organization": IOW
+    "displayName": "TS Type Router"
     commitIdentifier: ${git:sha1}
 
 custom:
