@@ -5,7 +5,7 @@ provider:
   region: ${opt:region, 'us-west-2'}
   stage: ${opt:stage, 'TEST'}
   runtime: java11
-  memorySize: 256
+  memorySize: 384
   timeout: 60
   logRetentionInDays: 90
   deploymentBucket:
