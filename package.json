@@ -2,7 +2,7 @@
   "name": "aqts-capture-ts-type-router",
   "description": "Deployment via serverless",
   "dependencies": {
-    "serverless": "2.7.0",
+    "serverless": "2.11.0",
     "serverless-pseudo-parameters": "2.5.0",
     "serverless-plugin-git-variables": "^4.0.0"
   }
