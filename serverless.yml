@@ -2,12 +2,18 @@ service: aqts-ts-type-router
 
 provider:
   name: aws
+  rolePermissionsBoundary:
+    Fn::Sub:
+      - "arn:aws:iam::${accountId}:policy/csr-Developer-Permissions-Boundary"
+      - accountId:
+          Ref: "AWS::AccountId"
   region: ${opt:region, 'us-west-2'}
   stage: ${opt:stage, 'TEST'}
   runtime: java11
   memorySize: 384
   timeout: 60
   logRetentionInDays: 90
+  vpc: ${self:custom.vpc}
   deploymentBucket:
     name: ${opt:bucket, iow-cloud-applications}
   stackTags:
@@ -27,11 +33,20 @@ custom:
     subnetIds: ${ssm:/iow/aws/vpc/${self:provider.stage}/subnetIds~split}
   db:
     connectInfo: ${ssm:/aws/reference/secretsmanager/NWCAPTURE-DB-${self:provider.stage}~true}
+  esLogs:
+    endpoint: ${ssm:/iow/aws/vpc/${self:provider.stage}/elasticsearchEndpoint}
+    index: ${self:service}
+    retentionInDays: 90
+    filterPattern: '?Exception ?ERROR ?WARN'
 
 functions:
   determineRoute:
     handler: gov.usgs.wma.waterdata.DetermineRouteHandler
-    role: arn:aws:iam::#{AWS::AccountId}:role/csr-Lambda-Role
+    role:
+      Fn::Sub:
+        - arn:aws:iam::${accountId}:role/csr-Lambda-Role
+        - accountId:
+            Ref: AWS::AccountId
     environment:
       FUNCTION_NAME: determineRoute
       AQTS_DATABASE_ADDRESS: ${self:custom.db.connectInfo.DATABASE_ADDRESS}
@@ -42,7 +57,6 @@ functions:
       AQTS_SCHEMA_OWNER_PASSWORD: ${self:custom.db.connectInfo.SCHEMA_OWNER_PASSWORD}
       AWS_DEPLOYMENT_REGION: ${self:provider.region}
       ROOT_LOG_LEVEL: INFO
-    vpc: ${self:custom.vpc}
 
 resources:
   Resources:
@@ -90,7 +104,7 @@ resources:
 
 plugins:
   - serverless-plugin-git-variables
-  - serverless-pseudo-parameters
+  - serverless-es-logs
 
 package:
   artifact: aqts-ts-type-router-aws.jar
