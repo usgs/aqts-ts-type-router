@@ -3,7 +3,7 @@
   "description": "Deployment via serverless",
   "dependencies": {
     "serverless": "2.7.0",
-    "serverless-pseudo-parameters": "2.5.0",
-    "serverless-plugin-git-variables": "^4.0.0"
+    "serverless-plugin-git-variables": "^5.0.1",
+    "serverless-es-logs": "3.4.1"
   }
 }
