@@ -19,7 +19,7 @@ provider:
   stackTags:
     "wma:project_id": "aqtscapture"
     "wma:subSystem": "aqtscapture"
-    "wma:applicationId": "AQTS Time Series Type Router"
+    "wma:application_id": "AQTS Time Series Type Router"
     "wma:contact": "Jim Kreft jkreft@usgs.gov"
     "wma:environment": ${self:provider.stage}
     "wma:taggingVersion": ${opt:taggingVersion}
