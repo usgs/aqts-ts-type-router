@@ -4,7 +4,7 @@
   "dependencies": {
     "serverless": "2.7.0",
     "serverless-plugin-git-variables": "^5.0.1",
-    "serverless-prune-plugin": "1.4.3",
+    "serverless-prune-plugin": "1.4.4",
     "serverless-es-logs": "3.4.1"
   }
 }
